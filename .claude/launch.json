@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "kanvas-client",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "-w", "@pm/client"],
+      "port": 5173,
+      "autoPort": true
+    }
+  ]
+}
