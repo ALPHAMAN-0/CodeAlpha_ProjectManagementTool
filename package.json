@@ -3,19 +3,25 @@
   "version": "1.0.0",
   "private": true,
   "description": "Collaborative project management tool (Trello/Asana-style) with real-time boards, task assignment, comments and notifications.",
-  "workspaces": ["shared", "server", "client"],
-  "engines": { "node": ">=20" },
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "comments": {
     "scripts": "These call tsc/vite/tsx directly rather than `npm run -w <workspace>`: a nested workspace `npm run` inside a script silently discards the rest of an && chain, which quietly broke both build and dev."
   },
   "scripts": {
-    "dev": "tsc -p shared/tsconfig.json && concurrently -k -n db,shared,server,client -c yellow,gray,blue,magenta \"npm:dev:db\" \"npm:dev:shared\" \"npm:dev:server\" \"npm:dev:client\"",
-    "dev:db": "tsx server/src/devDb.ts",
-    "dev:shared": "tsc -p shared/tsconfig.json --watch --preserveWatchOutput",
-    "dev:server": "tsx watch --clear-screen=false --exclude \"**/node_modules/**\" --exclude \"node_modules/**\" --exclude \"**/.data/**\" server/src/index.ts",
-    "dev:client": "vite --config client/vite.config.ts",
-    "build": "tsc -p shared/tsconfig.json && tsc -p server/tsconfig.json && vite build --config client/vite.config.ts",
-    "start": "node server/dist/index.js",
+    "dev": "node init && tsc -p shared/tsconfig.json && concurrently -k -n db,shared,server,client -c yellow,gray,blue,magenta \"npm:dev:db\" \"npm:dev:shared\" \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:db": "node init && tsx server/src/devDb.ts",
+    "dev:shared": "node init && tsc -p shared/tsconfig.json --watch --preserveWatchOutput",
+    "dev:server": "node init && tsx watch --clear-screen=false --exclude \"**/node_modules/**\" --exclude \"node_modules/**\" --exclude \"**/.data/**\" server/src/index.ts",
+    "dev:client": "node init && vite --config client/vite.config.ts",
+    "build": "node init && tsc -p shared/tsconfig.json && tsc -p server/tsconfig.json && vite build --config client/vite.config.ts",
+    "start": "node init && node server/dist/index.js",
     "seed": "tsx server/src/seed.ts",
     "db:dev": "tsx server/src/devDb.ts",
     "test": "vitest run --root server",
@@ -24,6 +30,8 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^3.3.2",
     "typescript": "^5.7.3"
   }
 }

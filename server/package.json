@@ -5,9 +5,9 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "tsx watch --clear-screen=false --exclude \"../node_modules/**\" --exclude \"**/node_modules/**\" --exclude \"../.data/**\" src/index.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
+    "dev": "node init && tsx watch --clear-screen=false --exclude \"../node_modules/**\" --exclude \"**/node_modules/**\" --exclude \"../.data/**\" src/index.ts",
+    "build": "node init && tsc -p tsconfig.json",
+    "start": "node init && node dist/index.js",
     "seed": "tsx src/seed.ts",
     "test": "vitest run",
     "test:watch": "vitest",
